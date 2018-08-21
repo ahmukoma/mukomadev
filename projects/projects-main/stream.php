@@ -8,8 +8,8 @@
 		<title>Halcyon</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="/mukomadev-8/projects/projects-css/stream.css">
-		<script src="/mukomadev-8/js/jquery-3.2.1.js"></script>
+		<link rel="stylesheet" type="text/css" href="/mukomadev/projects/projects-css/stream.css">
+		<script src="/mukomadev/js/jquery-3.2.1.js"></script>
 	</head>
 	
 	<body>
@@ -41,16 +41,17 @@
 									navigator.mozGetUserMedia ||
 									navigator.msGetUserMedia;
 			
-			navigator.getMedia({
-				video: true,
-				audio: false
-			}, function(stream){
-				video.src = vendorUrl.createObjectURL(stream);
-				video.play();
-			}, function(error){
-				// an error occured
-				// error.code
-			});
+            if(navigator.getUserMedia){
+                navigator.getUserMedia({
+                    video: true,
+                    audio: false
+                }, function(stream){
+                    video.src = vendorUrl.createObjectURL(stream);
+                    video.play();
+                }, function(error){
+                    alert('An error occured.');
+                });
+            }
 			
 			video.addEventListener("play", function(){
 				draw(this, c_live, 720, 540);
